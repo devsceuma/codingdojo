@@ -1,33 +1,51 @@
-class Erastostenes{
-
-    
+class Erastostenes{ 
     
     constructor(){
-        this.alvo = 81
-        this.listaNumeros =[]
+        this.valFinal = 81
+        this.maiorValChecado
+        this.listaNumeros = []
+        this.listNumerosChecar = []
+        this.valorInicial = 1;
+        this.listaAuxiliar = []
         this.adicionaValoresNaLista()
-        this.listaDeMultiplus = []
+        this.criarListaDeNumeros()  
+        this.extrairNumerosPrimos()
+       
     }
-
 
     adicionaValoresNaLista(){
-        for(let i = 1;i<Math.sqrt(this.alvo);i++){
-            this.listaNumeros.push(i+1)
-        }
-        this.encontrarNumerosPrimos(this.listaNumeros);
+      //Esse é o maior valor a ser checado na operação !
+       this.maiorValChecado = Math.sqrt(this.valFinal);
     }
 
-
-    encontrarNumerosPrimos(listaNumeros){
-        const numeroCorrente = 2;
-        listaNumeros.forEach(i => {
-            if(i % numeroCorrente !== 0){
-                console.log(i+" Os primo");
-            } else {
-                console.log(i+"Mult de 2");
+    criarListaDeNumeros(){
+       for(let i = this.valorInicial; i <= this.valFinal; i++ ){
+            this.listaNumeros.push(i);
+            if(i <= this.maiorValChecado){
+                this.listNumerosChecar.push(i);
             }
-        })
-        console.log(this.listaDeMultiplus);
+       }
     }
+
+    extrairNumerosPrimos(){
+            for(let indexList = this.listaNumeros[1]; indexList <= this.listaNumeros.length; indexList++){
+              let primo =  this.verificaSeEPrimao(indexList);
+              if(primo == true)
+              this.listaAuxiliar.push(indexList);
+        }
+            console.log(this.listaAuxiliar);
+    }
+
+    verificaSeEPrimao(num){
+        if(num!=1){
+        for (var i = 2; i < num; i++)
+            if (num % i == 0) return false;
+        return num !== 1;
+        }
+    }
+
+
+
+
 
 }
